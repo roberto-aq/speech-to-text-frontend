@@ -60,4 +60,31 @@ export class ActionsApi {
 			throw new Error('Error al descargar la transcrición');
 		}
 	}
+
+	/* ********************************** */
+	/*               API KEY              */
+	/* ********************************** */
+	static async getApiKey() {
+		try {
+			const { data } = await api.get('/settings/api-key');
+
+			return data;
+		} catch (error) {
+			console.log(error);
+			throw new Error('Error al obtener la clave de la API');
+		}
+	}
+
+	static async updateApiKey(apiKey: string) {
+		try {
+			const { data } = await api.post('/settings/update-api-key', {
+				newApiKey: apiKey,
+			});
+
+			return data;
+		} catch (error) {
+			console.log(error);
+			throw new Error('Error al actualizar la clave de la API');
+		}
+	}
 }
