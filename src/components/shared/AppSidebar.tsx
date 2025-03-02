@@ -14,13 +14,18 @@ import Link from 'next/link';
 
 const links = [
 	{
-		title: 'Getting Started',
+		title: 'Inicio rápido',
 		url: '#',
 		items: [
 			{
 				title: 'Audio a Texto',
 				url: '/dashboard/audio',
 				isActive: true,
+			},
+
+			{
+				title: 'Transcripciones',
+				url: '/dashboard/transcriptions',
 			},
 			{
 				title: 'Configuración',
@@ -52,7 +57,7 @@ export const AppSidebar = ({
 											asChild
 											isActive={item.isActive}
 										>
-											<a href={item.url}>{item.title}</a>
+											<Link href={item.url}>{item.title}</Link>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
 								))}
