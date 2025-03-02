@@ -3,6 +3,7 @@
 import DocumentList from '@/components/transcriptions/DocumentsList';
 import { useTranscriptions } from '@/hooks';
 import { ActionsApi } from '@/lib/actionsApi';
+import { toast } from 'sonner';
 
 export default function TranscriptionsPage() {
 	const { data: documents, isLoading } = useTranscriptions();
@@ -13,6 +14,9 @@ export default function TranscriptionsPage() {
 
 	const downloadTranscription = (filename: string) => {
 		ActionsApi.downloadTranscription(filename);
+		toast.success('Transcripción descargada correctamente', {
+			duration: 2000,
+		});
 	};
 
 	if (documents) {

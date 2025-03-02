@@ -8,7 +8,7 @@ export const useTranscriptions = () => {
 	});
 
 	return {
-		data,
+		data: data?.data || [],
 		isLoading,
 	};
 };
