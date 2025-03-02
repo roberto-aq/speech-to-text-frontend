@@ -1,7 +1,5 @@
+import { redirect } from 'next/navigation';
+
 export default function DashboardPage() {
-	return (
-		<div>
-			<h1>Dashboard Home</h1>
-		</div>
-	);
+	return redirect('/dashboard/audio');
 }
