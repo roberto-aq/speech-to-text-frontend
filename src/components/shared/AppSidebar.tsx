@@ -1,3 +1,5 @@
+'use client';
+
 import {
 	Sidebar,
 	SidebarContent,
@@ -11,6 +13,7 @@ import {
 	SidebarRail,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const links = [
 	{
@@ -38,6 +41,8 @@ const links = [
 export const AppSidebar = ({
 	...props
 }: React.ComponentProps<typeof Sidebar>) => {
+	const pathName = usePathname();
+
 	return (
 		<Sidebar {...props}>
 			<SidebarHeader>
@@ -51,16 +56,17 @@ export const AppSidebar = ({
 						<SidebarGroupLabel>{item.title}</SidebarGroupLabel>
 						<SidebarGroupContent>
 							<SidebarMenu>
-								{item.items.map(item => (
-									<SidebarMenuItem key={item.title}>
-										<SidebarMenuButton
-											asChild
-											isActive={item.isActive}
-										>
-											<Link href={item.url}>{item.title}</Link>
-										</SidebarMenuButton>
-									</SidebarMenuItem>
-								))}
+								{item.items.map(item => {
+									const isActive = pathName === item.url;
+
+									return (
+										<SidebarMenuItem key={item.title}>
+											<SidebarMenuButton asChild isActive={isActive}>
+												<Link href={item.url}>{item.title}</Link>
+											</SidebarMenuButton>
+										</SidebarMenuItem>
+									);
+								})}
 							</SidebarMenu>
 						</SidebarGroupContent>
 					</SidebarGroup>

@@ -17,7 +17,6 @@ export default function SettingsPage() {
 
 	useEffect(() => {
 		if (apiKey) {
-			console.log(apiKey)
 			setNewApiKey(apiKey);
 		}
 	}, [apiKey]);
