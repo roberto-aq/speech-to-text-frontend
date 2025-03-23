@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Download, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -11,18 +11,20 @@ import { Transcription } from '@/types/transcription';
 interface Props {
 	documents: Transcription[];
 	onDownload: (filename: string) => void;
+	onDelete: (filename: string) => void;
 }
 
 export default function DocumentList({
 	documents,
 	onDownload,
+	onDelete,
 }: Props) {
 	return (
-		<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4'>
+		<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6'>
 			{documents.map(doc => (
 				<Card
 					key={doc.filename}
-					className='flex flex-col items-center p-4 shadow-md'
+					className='flex flex-col items-center shadow-md'
 				>
 					{/* Imagen del Documento */}
 					<Image
@@ -35,7 +37,7 @@ export default function DocumentList({
 					/>
 
 					{/* Información del Documento */}
-					<CardContent className='flex items-center'>
+					<CardContent className='flex items-center justify-between w-full'>
 						<div className='flex flex-col'>
 							<p className='text-lg font-semibold truncate w-40'>
 								{doc.filename}
@@ -50,14 +52,24 @@ export default function DocumentList({
 								)}
 							</p>
 						</div>
-						{/* Botón de Descarga */}
-						<Button
-							variant='outline'
-							onClick={() => onDownload(doc.filename)}
-							className='cursor-pointer'
-						>
-							<Download className='h-6 w-6' />
-						</Button>
+						<div className='flex gap-2 items-center flex-wrap'>
+							{/* Botón de Descarga */}
+							<Button
+								variant='outline'
+								onClick={() => onDownload(doc.filename)}
+								className='cursor-pointer'
+							>
+								<Download className='h-6 w-6' />
+							</Button>
+							{/* Botón de Eliminar */}
+							<Button
+								variant='destructive'
+								onClick={() => onDelete(doc.filename)}
+								className='cursor-pointer'
+							>
+								<Trash2 className='h-6 w-6' />
+							</Button>
+						</div>
 					</CardContent>
 				</Card>
 			))}

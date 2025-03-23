@@ -1,15 +1,17 @@
 'use client';
 
+import { Loader } from '@/components/shared/Loader';
 import DocumentList from '@/components/transcriptions/DocumentsList';
-import { useTranscriptions } from '@/hooks';
+import { useDeleteTranscription, useTranscriptions } from '@/hooks';
 import { ActionsApi } from '@/lib/actionsApi';
 import { toast } from 'sonner';
 
 export default function TranscriptionsPage() {
 	const { data: documents, isLoading } = useTranscriptions();
+	const { isPending, mutate } = useDeleteTranscription();
 
-	if (isLoading) {
-		return <div>Cargando...</div>;
+	if (isLoading || isPending) {
+		return <Loader />;
 	}
 
 	const downloadTranscription = (filename: string) => {
@@ -19,10 +21,19 @@ export default function TranscriptionsPage() {
 		});
 	};
 
+	const deleteTranscription = (filename: string) => {
+		mutate(filename);
+		toast.success('Transcripción eliminada correctamente', {
+			duration: 2000,
+		});
+	};
+
 	if (documents) {
 		return (
-			<div>
-				<h1>Lista de Transcripciones</h1>
+			<div className='p-4 space-y-6'>
+				<h1 className='text-2xl font-bold'>
+					Lista de Transcripciones
+				</h1>
 
 				{documents.length === 0 ? (
 					<p className='text-center text-gray-500'>
@@ -32,6 +43,7 @@ export default function TranscriptionsPage() {
 					<DocumentList
 						documents={documents}
 						onDownload={downloadTranscription}
+						onDelete={deleteTranscription}
 					/>
 				)}
 			</div>

@@ -61,6 +61,19 @@ export class ActionsApi {
 		}
 	}
 
+	static async deleteTranscription(filename: string) {
+		try {
+			const { data } = await api.delete(
+				`/transcriptions/delete/${filename}`
+			);
+
+			return data;
+		} catch (error) {
+			console.log(error);
+			throw new Error('Error al eliminar la transcripción');
+		}
+	}
+
 	/* ********************************** */
 	/*               API KEY              */
 	/* ********************************** */
