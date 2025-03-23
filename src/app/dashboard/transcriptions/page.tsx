@@ -36,9 +36,11 @@ export default function TranscriptionsPage() {
 				</h1>
 
 				{documents.length === 0 ? (
-					<p className='text-center text-gray-500'>
-						No hay transcripciones disponibles.
-					</p>
+					<div className='flex h-full justify-center mt-20'>
+						<p className='text-center text-xl font-semibold text-slate-900'>
+							No hay transcripciones disponibles.
+						</p>
+					</div>
 				) : (
 					<DocumentList
 						documents={documents}
