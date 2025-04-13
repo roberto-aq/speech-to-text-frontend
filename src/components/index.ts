@@ -9,3 +9,8 @@ export * from './auth/LoginForm';
 export * from './shared/AppSidebar';
 export * from './shared/AppBreadcrumb';
 export * from './shared/Loader';
+
+/* ********************************** */
+/*                HOME                */
+/* ********************************** */
+export * from './home/Navbar';
