@@ -3,10 +3,10 @@ import { Button } from '../ui/button';
 
 export const Navbar = () => {
 	return (
-		<header className='bg-black/50 text-white  shadow m-5 p-5 rounded-lg backdrop-blur-md'>
-			<div className='container mx-auto flex justify-between items-center px-5'>
+		<header className='bg-black/50 text-white p-3 m-3 shadow rounded-lg backdrop-blur-md sm:m-5 sm:p-5 '>
+			<div className='container mx-auto flex gap-3 px-2 justify-between items-center sm:px-5 sm:gap-0 '>
 				{/* Logo o nombre de la marca */}
-				<Link href='/' className='text-2xl font-bold'>
+				<Link href='/' className='text-xl sm:text-2xl font-bold'>
 					TxtSpeechy
 				</Link>
 
@@ -19,11 +19,11 @@ export const Navbar = () => {
 					</nav>
 
 					{/* Botón de acción (por ejemplo, Iniciar Sesión) para pantallas grandes */}
-					<div className='hidden md:block'>
+					<div className=''>
 						<Button
 							variant='default'
 							size='default'
-							className='cursor-pointer'
+							className='cursor-pointer '
 							asChild
 						>
 							<Link href='/auth/login'>Iniciar Sesión</Link>

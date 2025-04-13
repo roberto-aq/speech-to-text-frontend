@@ -53,7 +53,7 @@ export const AppSidebar = ({
 	return (
 		<Sidebar {...props}>
 			<SidebarHeader className='p-5'>
-				<Link href={'/dashboard'} passHref>
+				<Link href={'/'} passHref>
 					<span className='text-3xl font-bold'>TxtSpeechy</span>
 				</Link>
 			</SidebarHeader>

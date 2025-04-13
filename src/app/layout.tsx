@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: 'Audio a Texto',
+	title: 'TxtSpeechy | Audio a Texto',
 	description: 'Conjunto de herramientas automatizadas',
 };
 
