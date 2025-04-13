@@ -1,12 +1,28 @@
 import { api } from '@/config/api';
+import { supabase } from './supabase';
 
 export class ActionsApi {
+	/**
+	 * Método privado para obtener el user id desde Supabase.
+	 * Lanza un error si no se puede obtener el usuario autenticado.
+	 */
+	private static async getUserId(): Promise<string> {
+		const { data, error } = await supabase.auth.getUser();
+
+		if (error || !data?.user) {
+			throw new Error('No se pudo obtener el usuario autenticado.');
+		}
+		return data.user.id;
+	}
 	/* ********************************** */
 	/*            UPLOAD AUDIOS           */
 	/* ********************************** */
 	static async uploadAudioAndTranscribe(file: File) {
+		const userId = await ActionsApi.getUserId();
+
 		const formData = new FormData();
 		formData.append('audio', file);
+		formData.append('user_id', userId);
 
 		try {
 			const { data } = await api.post(
@@ -30,8 +46,12 @@ export class ActionsApi {
 	/*     TRANSCRIPTIONS OR DOCUMENTS    */
 	/* ********************************** */
 	static async getTranscriptions() {
+		const userId = await ActionsApi.getUserId();
+
 		try {
-			const { data } = await api.get('/transcriptions');
+			const { data } = await api.get(`/transcriptions/${userId}`);
+
+			console.log(data);
 
 			return data;
 		} catch (error) {

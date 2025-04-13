@@ -39,7 +39,8 @@ export default function DashboardAudioPage() {
 				);
 				setFile(null);
 			},
-			onError: () => {
+			onError: error => {
+				console.log(error);
 				toast.error('Error al subir el archivo de audio', {
 					duration: 2000,
 				});

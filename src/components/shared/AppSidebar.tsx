@@ -62,16 +62,18 @@ export const AppSidebar = ({
 					<SidebarGroup key={item.title}>
 						<SidebarGroupLabel>{item.title}</SidebarGroupLabel>
 						<SidebarGroupContent>
-							<SidebarMenu className='space-y-0.5'>
+							<SidebarMenu className='space-y-1.5'>
 								{item.items.map(item => {
 									const isActive = pathName === item.url;
 
 									return (
 										<SidebarMenuItem key={item.title}>
-											<SidebarMenuButton asChild isActive={isActive}>
-												<Link href={item.url} className='text-lg'>
-													{item.title}
-												</Link>
+											<SidebarMenuButton
+												asChild
+												isActive={isActive}
+												className='text-lg px-4 py-5'
+											>
+												<Link href={item.url}>{item.title}</Link>
 											</SidebarMenuButton>
 										</SidebarMenuItem>
 									);
@@ -86,7 +88,7 @@ export const AppSidebar = ({
 					<SidebarMenuItem>
 						<SidebarMenuButton
 							onClick={handleLogout}
-							className='cursor-pointer'
+							className='cursor-pointer text-lg p-4 py-5'
 						>
 							Cerrar sesión
 						</SidebarMenuButton>

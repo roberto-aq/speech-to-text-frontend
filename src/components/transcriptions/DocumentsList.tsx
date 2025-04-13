@@ -20,7 +20,7 @@ export default function DocumentList({
 	onDelete,
 }: Props) {
 	return (
-		<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6'>
+		<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
 			{documents.map(doc => (
 				<Card
 					key={doc.filename}
@@ -37,14 +37,14 @@ export default function DocumentList({
 					/>
 
 					{/* Información del Documento */}
-					<CardContent className='flex items-center justify-between w-full'>
+					<CardContent className='flex flex-col gap-3 items-center justify-between w-full'>
 						<div className='flex flex-col'>
 							<p className='text-lg font-semibold truncate w-40'>
 								{doc.filename}
 							</p>
 							<p className='text-sm text-gray-500'>
 								{format(
-									new Date(doc.createdAt),
+									new Date(doc.created_at),
 									'dd MMM yyyy, HH:mm',
 									{
 										locale: es,
@@ -52,7 +52,7 @@ export default function DocumentList({
 								)}
 							</p>
 						</div>
-						<div className='flex gap-2 items-center flex-wrap'>
+						<div className='flex gap-3 items-center flex-wrap'>
 							{/* Botón de Descarga */}
 							<Button
 								variant='outline'

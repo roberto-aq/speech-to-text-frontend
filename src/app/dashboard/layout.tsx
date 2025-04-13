@@ -23,8 +23,6 @@ export default function DashboardLayout({
 	const { data: user, isLoading } = useUser();
 	const router = useRouter();
 
-	console.log(user);
-
 	useEffect(() => {
 		if (!user) {
 			router.push('/auth/login');
@@ -43,7 +41,7 @@ export default function DashboardLayout({
 				{isLoading ? (
 					<Loader />
 				) : (
-					<main className='flex h-full flex-col overflow-hidden'>
+					<main className='flex h-full flex-col overflow-hidden p-5'>
 						<div className='flex-1 overflow-auto'>{children}</div>
 					</main>
 				)}
