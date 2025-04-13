@@ -75,9 +75,8 @@ export class ActionsApi {
 
 			const { url: urlDoc, filename } = data;
 
-			const url = window.URL.createObjectURL(new Blob([urlDoc]));
 			const link = document.createElement('a');
-			link.href = url;
+			link.href = urlDoc;
 			link.setAttribute('download', filename);
 			document.body.appendChild(link);
 			link.click();
