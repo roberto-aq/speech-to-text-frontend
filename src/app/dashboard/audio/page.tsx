@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useUploadAudio } from '@/hooks';
 import { Loader2, UploadCloud } from 'lucide-react';
@@ -47,7 +48,7 @@ export default function DashboardAudioPage() {
 	};
 
 	return (
-		<div className='max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg'>
+		<Card className='max-w-lg mx-auto mt-10 p-6 shadow-lg rounded-lg'>
 			<h1 className='text-2xl font-bold text-center mb-4'>
 				🎙️ Subir Audio para Transcripción
 			</h1>
@@ -80,6 +81,6 @@ export default function DashboardAudioPage() {
 					</>
 				)}
 			</Button>
-		</div>
+		</Card>
 	);
 }

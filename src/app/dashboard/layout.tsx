@@ -21,7 +21,7 @@ export default function DashboardLayout({
 					<Separator orientation='vertical' className='mr-2 h-4' />
 					<AppBreadcrumb />
 				</header>
-				<main className='flex flex-1 flex-col gap-4 p-4 bg-amber-100'>
+				<main className='flex flex-1 flex-col gap-4 p-4'>
 					{children}
 				</main>
 			</SidebarInset>
