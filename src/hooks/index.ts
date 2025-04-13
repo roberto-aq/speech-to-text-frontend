@@ -8,3 +8,4 @@ export * from './useDeleteTranscription';
 /*                AUTH                */
 /* ********************************** */
 export * from './auth/useLogin';
+export * from './auth/useUser';

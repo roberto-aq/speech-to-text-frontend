@@ -23,3 +23,19 @@ export const login = async ({ email, password }: ILogin) => {
 		return false;
 	}
 };
+
+export const getUser = async () => {
+	try {
+		const { data, error } = await supabase.auth.getUser();
+
+		if (error) {
+			console.log('Error al obtener el usuario', error);
+			throw error.message;
+		}
+
+		return data.user;
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
