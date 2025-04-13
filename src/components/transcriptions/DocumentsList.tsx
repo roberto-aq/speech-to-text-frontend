@@ -10,8 +10,8 @@ import { Transcription } from '@/types/transcription';
 
 interface Props {
 	documents: Transcription[];
-	onDownload: (filename: string) => void;
-	onDelete: (filename: string) => void;
+	onDownload: (transcriptionId: string) => void;
+	onDelete: (transcriptionId: string) => void;
 }
 
 export default function DocumentList({
@@ -56,7 +56,7 @@ export default function DocumentList({
 							{/* Botón de Descarga */}
 							<Button
 								variant='outline'
-								onClick={() => onDownload(doc.filename)}
+								onClick={() => onDownload(doc.id)}
 								className='cursor-pointer'
 							>
 								<Download className='h-6 w-6' />
@@ -64,7 +64,7 @@ export default function DocumentList({
 							{/* Botón de Eliminar */}
 							<Button
 								variant='destructive'
-								onClick={() => onDelete(doc.filename)}
+								onClick={() => onDelete(doc.id)}
 								className='cursor-pointer'
 							>
 								<Trash2 className='h-6 w-6' />

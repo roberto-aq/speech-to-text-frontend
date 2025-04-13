@@ -60,32 +60,48 @@ export class ActionsApi {
 		}
 	}
 
-	static async downloadTranscription(filename: string) {
+	static async downloadTranscription(transcriptionId: string) {
+		const userId = await ActionsApi.getUserId();
+
 		try {
 			const { data } = await api.get(
-				`/transcriptions/download/${filename}`,
+				`/transcriptions/download/${transcriptionId}`,
 				{
-					responseType: 'blob',
+					params: {
+						userId,
+					},
 				}
 			);
 
-			const url = window.URL.createObjectURL(new Blob([data]));
+			const { url: urlDoc, filename } = data;
+
+			const url = window.URL.createObjectURL(new Blob([urlDoc]));
 			const link = document.createElement('a');
 			link.href = url;
 			link.setAttribute('download', filename);
 			document.body.appendChild(link);
 			link.click();
+
+			return {
+				message: 'Transcripción descargada correctamente',
+				success: true,
+			};
 		} catch (error) {
 			console.log(error);
-			throw new Error('Error al descargar la transcrición');
+			return {
+				success: false,
+				message: 'Error al descargar la transcripción ',
+			};
 		}
 	}
 
-	static async deleteTranscription(filename: string) {
+	static async deleteTranscription(transcriptionId: string) {
 		try {
 			const { data } = await api.delete(
-				`/transcriptions/delete/${filename}`
+				`/transcriptions/${transcriptionId}`
 			);
+
+			console.log(data);
 
 			return data;
 		} catch (error) {

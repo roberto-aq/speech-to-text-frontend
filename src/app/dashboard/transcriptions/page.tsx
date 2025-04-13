@@ -14,15 +14,24 @@ export default function TranscriptionsPage() {
 		return <Loader />;
 	}
 
-	const downloadTranscription = (filename: string) => {
-		ActionsApi.downloadTranscription(filename);
-		toast.success('Transcripción descargada correctamente', {
+	const downloadTranscription = async (transcriptionId: string) => {
+		const { success, message } =
+			await ActionsApi.downloadTranscription(transcriptionId);
+
+		if (!success) {
+			toast.error(message, {
+				duration: 2000,
+			});
+			return;
+		}
+
+		toast.success(message, {
 			duration: 2000,
 		});
 	};
 
-	const deleteTranscription = (filename: string) => {
-		mutate(filename);
+	const deleteTranscription = (transcriptionId: string) => {
+		mutate(transcriptionId);
 		toast.success('Transcripción eliminada correctamente', {
 			duration: 2000,
 		});
