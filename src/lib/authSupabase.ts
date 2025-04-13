@@ -20,7 +20,7 @@ export const login = async ({ email, password }: ILogin) => {
 		return data;
 	} catch (error) {
 		console.log(error);
-		return false;
+		throw error;
 	}
 };
 
@@ -37,5 +37,21 @@ export const getUser = async () => {
 	} catch (error) {
 		console.log(error);
 		return false;
+	}
+};
+
+export const logout = async () => {
+	try {
+		const { error } = await supabase.auth.signOut();
+
+		if (error) {
+			console.log('Error al cerrar sesión', error);
+			throw error.message;
+		}
+
+		return true;
+	} catch (error) {
+		console.log(error);
+		throw error;
 	}
 };
