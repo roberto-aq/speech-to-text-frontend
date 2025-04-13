@@ -13,8 +13,6 @@ export default function AuthLayout({
 	const { data: user, isLoading } = useUser();
 	const router = useRouter();
 
-	console.log('AuthLayout', user);
-
 	useEffect(() => {
 		if (user) {
 			router.replace('/dashboard/audio');

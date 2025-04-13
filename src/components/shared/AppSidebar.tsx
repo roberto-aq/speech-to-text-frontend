@@ -3,6 +3,7 @@
 import {
 	Sidebar,
 	SidebarContent,
+	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
@@ -45,9 +46,9 @@ export const AppSidebar = ({
 
 	return (
 		<Sidebar {...props}>
-			<SidebarHeader>
+			<SidebarHeader className='p-5'>
 				<Link href={'/dashboard'} passHref>
-					<span className='text-3xl font-bold'>Logo</span>
+					<span className='text-3xl font-bold'>TxtSpeechy</span>
 				</Link>
 			</SidebarHeader>
 			<SidebarContent>
@@ -55,14 +56,14 @@ export const AppSidebar = ({
 					<SidebarGroup key={item.title}>
 						<SidebarGroupLabel>{item.title}</SidebarGroupLabel>
 						<SidebarGroupContent>
-							<SidebarMenu>
+							<SidebarMenu className='space-y-0.5'>
 								{item.items.map(item => {
 									const isActive = pathName === item.url;
 
 									return (
 										<SidebarMenuItem key={item.title}>
 											<SidebarMenuButton asChild isActive={isActive}>
-												<Link href={item.url}>{item.title}</Link>
+												<Link href={item.url} className='text-lg'>{item.title}</Link>
 											</SidebarMenuButton>
 										</SidebarMenuItem>
 									);
@@ -72,6 +73,13 @@ export const AppSidebar = ({
 					</SidebarGroup>
 				))}
 			</SidebarContent>
+			<SidebarFooter className='pb-5'>
+				<SidebarMenu>
+					<SidebarMenuItem>
+						<SidebarMenuButton>Cerrar sesión</SidebarMenuButton>
+					</SidebarMenuItem>
+				</SidebarMenu>
+			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>
 	);
