@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@/hooks';
+import { useAuthListener, useUser } from '@/hooks';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -10,6 +10,8 @@ export default function AuthLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	useAuthListener();
+
 	const { data: user, isLoading } = useUser();
 	const router = useRouter();
 
@@ -26,10 +28,11 @@ export default function AuthLayout({
 			</div>
 		);
 
-	if (!user && !isLoading)
-		return (
-			<div className='flex min-h-svh w-full items-center justify-center p-6 md:p-10'>
-				<main className='w-full max-w-sm'>{children}</main>
-			</div>
-		);
+	if (user) return null;
+
+	return (
+		<div className='flex min-h-svh w-full items-center justify-center p-6 md:p-10'>
+			<main className='w-full max-w-sm'>{children}</main>
+		</div>
+	);
 }

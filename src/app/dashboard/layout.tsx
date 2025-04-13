@@ -1,3 +1,5 @@
+'use client';
+
 import { Separator } from '@/components/ui/separator';
 import {
 	SidebarInset,
@@ -6,12 +8,29 @@ import {
 } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/shared/AppSidebar';
 import { AppBreadcrumb } from '@/components/shared/AppBreadcrumb';
+import { useAuthListener, useUser } from '@/hooks';
+import { Loader } from '@/components';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function DashboardLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	useAuthListener();
+
+	const { data: user, isLoading } = useUser();
+	const router = useRouter();
+
+	console.log(user);
+
+	useEffect(() => {
+		if (!user) {
+			router.push('/auth/login');
+		}
+	}, [user, router]);
+
 	return (
 		<SidebarProvider>
 			<AppSidebar />
@@ -21,9 +40,13 @@ export default function DashboardLayout({
 					<Separator orientation='vertical' className='mr-2 h-4' />
 					<AppBreadcrumb />
 				</header>
-				<main className='flex flex-1 flex-col gap-4 p-4'>
-					{children}
-				</main>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<main className='flex h-full flex-col overflow-hidden'>
+						<div className='flex-1 overflow-auto'>{children}</div>
+					</main>
+				)}
 			</SidebarInset>
 		</SidebarProvider>
 	);

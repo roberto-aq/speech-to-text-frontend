@@ -13,6 +13,7 @@ import {
 	SidebarMenuItem,
 	SidebarRail,
 } from '@/components/ui/sidebar';
+import { useLogout } from '@/hooks';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -43,6 +44,11 @@ export const AppSidebar = ({
 	...props
 }: React.ComponentProps<typeof Sidebar>) => {
 	const pathName = usePathname();
+	const { mutate: logout } = useLogout();
+
+	const handleLogout = () => {
+		logout();
+	};
 
 	return (
 		<Sidebar {...props}>
@@ -63,7 +69,9 @@ export const AppSidebar = ({
 									return (
 										<SidebarMenuItem key={item.title}>
 											<SidebarMenuButton asChild isActive={isActive}>
-												<Link href={item.url} className='text-lg'>{item.title}</Link>
+												<Link href={item.url} className='text-lg'>
+													{item.title}
+												</Link>
 											</SidebarMenuButton>
 										</SidebarMenuItem>
 									);
@@ -76,7 +84,12 @@ export const AppSidebar = ({
 			<SidebarFooter className='pb-5'>
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton>Cerrar sesión</SidebarMenuButton>
+						<SidebarMenuButton
+							onClick={handleLogout}
+							className='cursor-pointer'
+						>
+							Cerrar sesión
+						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>
 			</SidebarFooter>
