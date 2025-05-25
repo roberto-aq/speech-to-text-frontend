@@ -55,6 +55,20 @@ export default function DashboardAudioPage() {
 					🎙️ Subir Audio para Transcripción
 				</h1>
 
+				{isPending && (
+					<div className='grid place-items-center mt-10'>
+						<div className='flex flex-col gap-3 items-center'>
+							<Loader2 className='size-14 animate-spin text-violet-300' />
+							<span className='text-lg  text-violet-300 flex flex-col space-y-1 items-center'>
+								<span className='font-semibold'>Procesando...</span>
+								<span className='font-medium text-indigo-50 text-base'>
+									Esto puede tomar unos minutos.
+								</span>
+							</span>
+						</div>
+					</div>
+				)}
+
 				{/* Input para seleccionar el archivo */}
 				<div className='flex flex-col items-center'>
 					<Input
@@ -72,7 +86,7 @@ export default function DashboardAudioPage() {
 				<Button
 					onClick={handleUpload}
 					disabled={isPending || !file}
-					className='w-full mt-4 flex items-center justify-center'
+					className='w-full mt-4 flex items-center justify-center cursor-pointer'
 				>
 					{isPending ? (
 						<>
@@ -88,20 +102,6 @@ export default function DashboardAudioPage() {
 
 				{/* Loader distintivo debajo del botón, solo se muestra cuando isPending es true */}
 			</Card>
-
-			{isPending && (
-				<div className='grid place-items-center mt-10'>
-					<div className='flex flex-col gap-3 items-center'>
-						<Loader2 className='size-14 animate-spin text-violet-300' />
-						<span className='text-lg  text-violet-300 flex flex-col space-y-1 items-center'>
-							<span className='font-semibold'>Procesando...</span>
-							<span className='font-medium text-indigo-50 text-base'>
-								Esto puede tomar unos minutos.
-							</span>
-						</span>
-					</div>
-				</div>
-			)}
 		</>
 	);
 }

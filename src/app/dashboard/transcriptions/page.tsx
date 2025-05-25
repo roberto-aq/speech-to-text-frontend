@@ -8,6 +8,8 @@ import { toast } from 'sonner';
 
 export default function TranscriptionsPage() {
 	const { data: documents, isLoading } = useTranscriptions();
+
+	
 	const { isPending, mutate } = useDeleteTranscription();
 
 	if (isLoading || isPending) {
